@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<VirtualBox>
+    <!-- xmlns="https://raw.github.com/alexec/maven-vbox-plugin/master/src/main/xsd/VirtualBox.xsd" -->
+    <Machine OSType="Ubuntu">
+        <MediaRegistry>
+            <HardDisks>
+                <HardDisk uuid="hd0" size="10000"/>
+            </HardDisks>
+            <DVDImages>
+                <DVDImage uuid="dvd0" location="http://www.ubuntu.com/start-download?distro=server&amp;bits=32&amp;release=lts"/>
+            </DVDImages>
+        </MediaRegistry>
+        <Hardware>
+            <Network>
+                <Adapter>
+                    <BridgedInterface name="en1: Wi-Fi (AirPort)"/>
+                </Adapter>
+            </Network>
+        </Hardware>
+        <StorageControllers>
+            <StorageController Bootable="true" type="ide">
+                <AttachedDevice type="DVD">
+                    <Image uuid="dvd0"/>
+                </AttachedDevice>
+            </StorageController>
+            <StorageController Bootable="true" type="sata">
+                <AttachedDevice type="HardDisk">
+                    <Image uuid="hd0"/>
+                </AttachedDevice>
+            </StorageController>
+        </StorageControllers>
+    </Machine>
+    <Manifest/>
+    <Provisions/>
+</VirtualBox>
