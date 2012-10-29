@@ -20,6 +20,15 @@
                 <version>1.0.0-SNAPSHOT</version>
                 <executions>
                     <execution>
+                        <id>1</id>
+                        <phase>process-resources</phase>
+                        <goals><goal>create-definition</goal></goals>
+                        <configuration>
+                            <name>UbuntuServer_12_10</name>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>2</id>
                         <goals>
                             <goal>recreate</goal>
                         </goals>

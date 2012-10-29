@@ -7,7 +7,8 @@
                 <HardDisk uuid="hd0" size="10000"/>
             </HardDisks>
             <DVDImages>
-                <DVDImage uuid="dvd0" location="http://www.ubuntu.com/start-download?distro=server&amp;bits=32&amp;release=lts"/>
+                <DVDImage uuid="dvd0"
+                          location="http://www.ubuntu.com/start-download?distro=server&amp;bits=32&amp;release=lts"/>
             </DVDImages>
         </MediaRegistry>
         <Hardware>
@@ -30,6 +31,15 @@
             </StorageController>
         </StorageControllers>
     </Machine>
-    <Manifest/>
-    <Provisions/>
+    <Manifest>
+        <File>preseed.cfg</File>
+    </Manifest>
+    <Provisions>
+        <Sleep ms="5000"/>
+        <KeyboardPutScanCodes keys="Esc,Esc,Enter"/>
+        <Sleep ms="1000"/>
+        <KeyboardPutScanCodes line="/install/vmlinuz noapic preseed/url=http://%IP%:%PORT%/preseed.cfg "/>
+        <Sleep ms="120000"/>
+        <PortForward hostport="3022" guestport="22"/>
+    </Provisions>
 </VirtualBox>
