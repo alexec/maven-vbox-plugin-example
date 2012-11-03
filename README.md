@@ -1,0 +1,1 @@
+An example of using my Maven plugin for Virtual Boxes.

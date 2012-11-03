@@ -15,8 +15,8 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>com.alexecollins.maven.plugins.vbox</groupId>
-                <artifactId>maven-vbox-plugin</artifactId>
+                <groupId>com.alexecollins.vbox</groupId>
+                <artifactId>vbox-maven-plugin</artifactId>
                 <version>1.0.0-SNAPSHOT</version>
                 <executions>
                     <execution>
@@ -30,7 +30,9 @@
                     <execution>
                         <id>2</id>
                         <goals>
-                            <goal>recreate</goal>
+                            <goal>clean</goal>
+                            <goal>create</goal>
+                            <goal>provision</goal>
                         </goals>
                     </execution>
                 </executions>
