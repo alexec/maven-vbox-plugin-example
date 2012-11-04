@@ -21,6 +21,7 @@
                 <artifactId>vbox-maven-plugin</artifactId>
                 <version>1.0.0-SNAPSHOT</version>
                 <executions>
+                    <!--
                     <execution>
                         <id>1</id>
                         <phase>process-resources</phase>
@@ -29,17 +30,18 @@
                             <name>CentOS_6_3</name>
                         </configuration>
                     </execution>
-                    <!--
                     -->
                     <!--
+                    -->
                     <execution>
-                        <id>2</id>
-                        <goals>
-                            <goal>clean</goal>
-                            <goal>provision</goal>
-                        </goals>
-                    </execution>
-                    -->
+                    <id>2</id>
+                    <goals>
+                        <goal>clean</goal>
+                        <goal>provision</goal>
+                        <goal>start</goal>
+                        <goal>stop</goal>
+                    </goals>
+                </execution>
                 </executions>
             </plugin>
             <plugin>
