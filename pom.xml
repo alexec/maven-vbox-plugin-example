@@ -29,6 +29,9 @@
                             <name>CentOS_6_3</name>
                         </configuration>
                     </execution>
+                    <!--
+                    -->
+                    <!--
                     <execution>
                         <id>2</id>
                         <goals>
@@ -36,6 +39,7 @@
                             <goal>provision</goal>
                         </goals>
                     </execution>
+                    -->
                 </executions>
             </plugin>
             <plugin>
@@ -48,7 +52,12 @@
                         <phase>pre-integration-test</phase>
                         <goals><goal>redeploy</goal></goals>
                         <configuration>
-                            <url>http://192.168.56.101:8080/manager</url>
+                            <!-- Tomcat 7 -->
+                            <!--
+                            <url>http://localhost:8080/manager/text</url>
+                            -->
+                            <!-- NAT port forward -->
+                            <url>http://localhost:18080/manager</url>
                             <username>admin</username>
                             <password>admin</password>
                         </configuration>

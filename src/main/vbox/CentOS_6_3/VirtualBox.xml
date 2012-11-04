@@ -27,7 +27,16 @@
             </BIOS>
             <Network>
                 <Adapter slot="0">
+                    <NAT/>
+                    <!--
                     <HostOnlyInterface name="vboxnet0"/>
+                    -->
+                    <!--
+                    <BridgedInterface name="Intel(R) 82579LM Gigabit Network Connection"/>
+                    -->
+                    <!--
+                    <BridgedInterface name="en1: Wi-Fi (AirPort)"/>
+                    -->
                 </Adapter>
             </Network>
             <IO>
