@@ -1,1 +1,4 @@
-An example of using my Maven plugin for Virtual Boxes.
+Overview
+===
+An example of using maven-vbox-plugin.
+
