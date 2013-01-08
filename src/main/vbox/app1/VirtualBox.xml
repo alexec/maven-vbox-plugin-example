@@ -29,7 +29,11 @@
             </BIOS>
             <Network>
                 <Adapter slot="0">
+                    <HostOnlyInterface name="vboxnet0"/>
+                </Adapter>
+                <Adapter slot="1">
                     <NAT/>
+                </Adapter>
                     <!--
                     <HostOnlyInterface name="vboxnet0"/>
                     -->
@@ -42,7 +46,6 @@
                     <!--
                     <InternalNetwork name="intnet0"/>
                     -->
-                </Adapter>
             </Network>
             <IO>
                 <IoCache enabled="true"/>

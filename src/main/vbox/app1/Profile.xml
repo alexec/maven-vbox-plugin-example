@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
 <Profile xmlns="http://www.alexecollins.com/vbox/profile" type="headless">
-    <ping url="socket://localhost:10022/"/>
-    <ping url="socket://localhost:18080/"/>
+    <ping url="socket://192.168.56.2:22/"/>
+    <ping url="socket://192.168.56.2:8080/"/>
 </Profile>
