@@ -85,10 +85,12 @@
                         <goals><goal>run</goal></goals>
                         <configuration>
                             <target>
-                                <scp todir="root@192.168.56.2/root" password="123456" trust="true">
-                                    <fileset dir="${project.build.directory}/rpm/hello-vbox/RPMS/noarch"/>
+                                <!-- note we force trust as new VMs will get new MAC etc. -->
+                                <scp todir="root@192.168.56.2:/root" password="123456" trust="true">
+                                    <fileset dir="${project.build.directory}/rpm/${project.artifactId}/RPMS/noarch"/>
                                 </scp>
-                                <sshexec host="192.168.56.2" username="root" password="123456" trust="true" command="yum -y install *.rpm"/>
+                                <sshexec host="192.168.56.2" username="root" password="123456" trust="true"
+                                         command="yum -y install *.rpm"/>
                             </target>
                         </configuration>
                     </execution>
