@@ -20,6 +20,21 @@
         <finalName>${project.artifactId}</finalName>
         <plugins>
             <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.7</version>
+                <executions>
+                    <execution>
+                        <phase>process-resources</phase>
+                        <goals><goal>run</goal></goals>
+                        <configuration>
+                            <target>
+                                <fixcrlf srcdir="src/main/vbox/app1/floppy0" eol="unix" />
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>com.alexecollins.vbox</groupId>
                 <artifactId>vbox-maven-plugin</artifactId>
                 <version>1.0.0-SNAPSHOT</version>
