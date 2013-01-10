@@ -104,6 +104,10 @@ Now get a cup of tea! Once that's complete, start the VM:
 
     mvn vbox:start
 
+Note: the default setting starts the VM in headless mode. You can switch to gui mode by changing Profile.xml:
+
+    <Profile xmlns="http://www.alexecollins.com/vbox/profile" type="gui">
+
 See if you can hit Apache:
 
     http://192.168.56.2:8080/
@@ -111,6 +115,10 @@ See if you can hit Apache:
 You can stop the box:
 
     mvn vbox:stop
+
+A detail, but we need to let the plugin know when the VMs ready to use (much like the Cargo plugin). Add this line to Profile.xml:
+
+    <ping url="socket://192.168.56.2:8080/"/>
 
 Next we need to build the war into an RPM:
 
