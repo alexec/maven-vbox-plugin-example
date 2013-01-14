@@ -198,7 +198,7 @@ vbox:stop is bound to this phase, so it'll package the war, provision the vox, a
 
     http://192.168.56.2:8080/maven-vbox-plugin-example
 
-Next, an integration test, so enable add failsafe plugin and create an execution for the standard goals. Create a test named HelloWorldIT, with a single method:
+Next, an integration test, so enable add fail-safe plugin and create an execution for the standard goals. Create a test named HelloWorldIT, with a single method:
 
     @Test
     public void testHelloWorld() throws Exception {
