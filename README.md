@@ -23,7 +23,7 @@ Firstly you need two get and compile two items. My plugin that creates VirtualBo
 
 	git clone https://github.com/alexec/maven-vbox-plugin.git
 	cd maven-vbox-plugin
-	git install
+	mvn install
 
 And the RPM plugin which we'll use to create the jar. There's a small bug in it which means if you're not creating an RPM on your target OS, yum might refuse to install it. We need to make a small patch, [MRPM-98.patch](https://raw.github.com/alexec/maven-vbox-plugin-example/master/MRPM-98.patch):
 
@@ -91,16 +91,16 @@ And we'll disable the firewall so our HTTP connection can get though (not very s
 
     firewall --disabled
 
-We're going to deploy the webapp onto Tomcat 6. This Cent OS install is pretty basic. Modify the post-install.sh and add the following lines before the power off:
+We're going to deploy the webapp onto Tomcat 6. This Cent OS install is pretty basic. Modify the post-install.sh and add the following lines to install and start Tomcat before the power off:
 
     yum -y install tomcat6
     chkconfig tomcat6 on
 
-We can test the setting easily, firstly create the box:
+We can test the setting easily, firstly create and provision the box:
 
     mvn vbox:provision
 
-Now get a cup of tea! Once that's complete, start the VM:
+It'll want to download the ISO, so you may want to go and get a cup of tea! Once that's complete, start the VM:
 
     mvn vbox:start
 
@@ -108,7 +108,7 @@ Note: the default setting starts the VM in headless mode. You can switch to gui 
 
     <Profile xmlns="http://www.alexecollins.com/vbox/profile" type="gui">
 
-See if you can hit Apache:
+See if you can hit Apache by opening:
 
     http://192.168.56.2:8080/
 
@@ -116,7 +116,7 @@ You can stop the box:
 
     mvn vbox:stop
 
-A detail, but we need to let the plugin know when the VMs ready to use (much like the Cargo plugin). Add this line to Profile.xml:
+A detail, but we need to let the plugin know when the box is ready to use (much like the Cargo plugin). Add this line to Profile.xml:
 
     <ping url="socket://192.168.56.2:8080/"/>
 
@@ -154,9 +154,9 @@ Next we need to build the war into an RPM:
         </executions>
     </plugin>
 
-You might to read up on this, but in summary it creates an RPM that copies the directory into Tomcat's webapp directory. Note the version is alpha-3, this includes the fix above. alpha-2 might serve your purpose.
+If you're not familiar with RPMs, you might want to read up on this, but in summary it creates an RPM that copies the directory into Tomcat's webapp directory. Note the version is alpha-3, this includes the fix above. alpha-2 might serve your purpose if you host OS is Linux.
 
-Finally, we need to deploy the RPM onto the box, so add this
+Finally, we need to deploy the RPM onto the box, we'll keep it simple and use Ant, so add this
 
     <plugin>
         <artifactId>maven-antrun-plugin</artifactId>
@@ -194,27 +194,26 @@ We can test this by executing:
 
     mvn pre-integration-test
 
-vbox:stop is bound to this phase, so it'll package the war, provision the vox, and deploy the war. Check out you handy work:
+vbox:start is bound to this phase, so it'll package the war, provision the vox, and deploy the war. Check out your handy work:
 
     http://192.168.56.2:8080/maven-vbox-plugin-example
 
-Next, an integration test, so enable add fail-safe plugin and create an execution for the standard goals. Create a test named HelloWorldIT, with a single method:
+Next, an integration test, so enable add the fail-safe plugin to you POM and create an execution for the standard goals. Create a test named HelloWorldIT, with a single method:
 
     @Test
     public void testHelloWorld() throws Exception {
         assertTrue(Jsoup.connect("http://192.168.56.2:8080/maven-vbox-plugin-example").get().html().contains("Hello World"));
     }
 
-You'll need to add JSoup and JUnit to the POM. Finally, test the whole kit:
+You'll need to add JSoup and JUnit to the POM dependencies. Finally, test the whole thing:
 
     mvn verify
 
-Now, go have a drink
+Now, celebrate! OK, I've obviously not covered a number of topics, so here are some links to get you started.
 
-- http://mojo.codehaus.org/rpm-maven-plugin/index.html - Maven Plugin Docs
+- http://mojo.codehaus.org/rpm-maven-plugin/index.html - Maven RPM Plugin Docs
 - http://rpm5.org/files/rpm/rpm-5.1/BINARY/ - rpmbuild for OS-X
-- https://gist.github.com/2815502 - fix for creating rpm's on OS-X
 - http://www.slideshare.net/actionjackx/automated-java-deployments-with-rpm - good slides on this same topic
 - http://stnor.wordpress.com/category/devops/ - good blog post on this same topic
-- http://www.alexecollins.com/?q=content/tips-writing-maven-plugins - my tips for writing plugins
-- http://maven.apache.org/guides/mini/guide-webapp.html
+- https://blogs.oracle.com/fatbloke/entry/networking_in_virtualbox1 - guide to VirtualBox networking
+- http://www.alexecollins.com/?q=content/tips-writing-maven-plugins - my tips for writing Maven plugins
