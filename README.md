@@ -25,7 +25,7 @@ Firstly you need two get and compile two items. My plugin that creates VirtualBo
 	cd maven-vbox-plugin
 	git install
 
-And the RPM plugin which we'll use to create the jar. There's a small bug in it which means if you're not creating an RPM on your target OS, yum might refuse to install it. We need to make a small patch (which can be found in the GitHere https://github.com/alexec/maven-vbox-plugin-example/MRPM-98.patch):
+And the RPM plugin which we'll use to create the jar. There's a small bug in it which means if you're not creating an RPM on your target OS, yum might refuse to install it. We need to make a small patch (which can be found in [here|MRPM-98.patch]):
 
 	svn co https://svn.codehaus.org/mojo/trunk/mojo/rpm-maven-plugin
 	cd rpm-maven-plugin
