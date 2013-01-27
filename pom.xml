@@ -6,7 +6,7 @@
 
     <groupId>com.alexecollins.vbox</groupId>
     <artifactId>maven-vbox-plugin-example</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>2.0.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
     <description>An example of using maven-vbox-plugin.</description>
@@ -48,6 +48,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <vbox.version>${project.version}</vbox.version>
     </properties>
 
     <build>
@@ -56,7 +57,7 @@
             <plugin>
                 <groupId>com.alexecollins.vbox</groupId>
                 <artifactId>vbox-maven-plugin</artifactId>
-                <version>1.0.0</version>
+                <version>${vbox.version}</version>
                 <executions>
                     <execution>
                         <goals>
@@ -181,5 +182,34 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <profiles>
+        <profile>
+            <id>cache</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.alexecollins.vbox</groupId>
+                        <artifactId>vbox-maven-plugin</artifactId>
+                        <version>${vbox.version}</version>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>clean</goal>
+                                    <goal>provision</goal>
+                                    <goal>start</goal>
+                                    <goal>stop</goal>
+                                </goals>
+                                <configuration>
+                                    <!-- use a global cache -->
+                                    <cacheDir>${user.home}/.vbox</cacheDir>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 </project>
