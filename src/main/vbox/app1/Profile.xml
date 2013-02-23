@@ -1,5 +1,0 @@
-<?xml version="1.0"?>
-<Profile xmlns="http://www.alexecollins.com/vbox/profile" type="gui">
-    <ping url="socket://192.168.56.2:22/" timeout="2 minutes"/>
-    <ping url="socket://192.168.56.2:8080/"/>
-</Profile>

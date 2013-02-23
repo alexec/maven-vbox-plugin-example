@@ -29,8 +29,8 @@
 
 
     <scm>
-        <connection>scm:git:https://github.com/alexec/maven-vbox-plugin-example.git</connection>
-        <developerConnection>scm:git:https://github.com/alexec/maven-vbox-plugin-example.git</developerConnection>
+        <connection>scm:git:git@github.com/alexec/maven-vbox-plugin-example.git</connection>
+        <developerConnection>scm:git:git@github.com/alexec/maven-vbox-plugin-example.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
 
@@ -39,16 +39,9 @@
         <url>https://github.com/alexec/maven-vbox-plugin-example/issues/</url>
     </issueManagement>
 
-    <distributionManagement>
-        <repository>
-            <id>localhost</id>
-            <url>file://localhost/${user.home}/.m2/repository</url>
-        </repository>
-    </distributionManagement>
-
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <vbox.version>${project.version}</vbox.version>
+        <vbox.version>2.0.0-SNAPSHOT</vbox.version>
     </properties>
 
     <build>
@@ -58,8 +51,35 @@
                 <groupId>com.alexecollins.vbox</groupId>
                 <artifactId>vbox-maven-plugin</artifactId>
                 <version>${vbox.version}</version>
+
                 <executions>
                     <execution>
+                        <id>create-definition</id>
+                        <goals><goal>create-definition</goal></goals>
+                        <configuration>
+                            <templateName>CentOS_6_3</templateName>
+                            <name>app1.domain2</name>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>patch-definition</id>
+                        <goals><goal>patch-definition</goal></goals>
+                        <configuration>
+                            <patches>
+                                <archPatch/>
+                                <predefinedPatch>
+                                    <name>CentOS_6_3--tomcat6</name>
+                                </predefinedPatch>
+                                <!--
+                                <userDefinedPatch>
+                                    <file>src/vbox/patches/user-defined.patch</file>
+                                </userDefinedPatch>
+                                -->
+                            </patches>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>default</id>
                         <goals>
                             <goal>clean</goal>
                             <goal>provision</goal>
@@ -113,7 +133,7 @@
                         </goals>
                         <configuration>
                             <target>
-                                <fixcrlf srcdir="src/main/vbox/app1/floppy0" eol="unix"/>
+                                <fixcrlf srcdir="src/main/vbox/app1.domain2/floppy0" eol="unix"/>
                             </target>
                         </configuration>
                     </execution>
@@ -192,20 +212,10 @@
                         <groupId>com.alexecollins.vbox</groupId>
                         <artifactId>vbox-maven-plugin</artifactId>
                         <version>${vbox.version}</version>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>clean</goal>
-                                    <goal>provision</goal>
-                                    <goal>start</goal>
-                                    <goal>stop</goal>
-                                </goals>
-                                <configuration>
-                                    <!-- use a global cache -->
-                                    <cacheDir>${user.home}/.vbox</cacheDir>
-                                </configuration>
-                            </execution>
-                        </executions>
+                        <configuration>
+                            <!-- use a global cache -->
+                            <cacheDir>${user.home}/.vbox</cacheDir>
+                        </configuration>
                     </plugin>
                 </plugins>
             </build>
