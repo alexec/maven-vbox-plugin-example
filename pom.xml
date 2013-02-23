@@ -58,7 +58,7 @@
                         <goals><goal>create-definition</goal></goals>
                         <configuration>
                             <templateName>CentOS_6_3</templateName>
-                            <name>app1.domain2</name>
+                            <name>app1.domain1</name>
                         </configuration>
                     </execution>
                     <execution>
@@ -133,7 +133,7 @@
                         </goals>
                         <configuration>
                             <target>
-                                <fixcrlf srcdir="src/main/vbox/app1.domain2/floppy0" eol="unix"/>
+                                <fixcrlf srcdir="src/main/vbox/app1.domain1/floppy0" eol="unix"/>
                             </target>
                         </configuration>
                     </execution>
